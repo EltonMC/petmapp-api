@@ -12,13 +12,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable;
 
+    protected $guarded = [];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        // 'name', 'email', 'gender'
     ];
 
     /**
@@ -27,6 +29,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        // 'password',
     ];
+
+    public function phone(){
+        return $this->hasOne('App\Phone');
+    }
+
+    public function address(){
+        return $this->hasOne('App\Address');
+    }
 }
