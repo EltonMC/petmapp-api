@@ -24,10 +24,16 @@ $router->delete('products/{id}', 'ProductsController@destroy');
 
 $router->post('login', 'AuthController@authenticate');
 
+$router->post('users', 'UserController@store');
+
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
-        $router->get('users', function() {
-            $users = \App\User::all();
-            return response()->json($users);
-        });
-    }
-);
+    $router->get('users/{id}', 'UserController@show');
+    $router->put('users/{id}', 'UserController@update');
+
+    $router->get('pets', 'PetController@index');
+    $router->post('pets', 'PetController@store');
+    $router->get('pets/{id}', 'PetController@show');
+    $router->put('pets/{id}', 'PetController@update');
+    $router->delete('pets/{id}', 'PetController@destroy');
+
+});

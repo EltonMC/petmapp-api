@@ -21,7 +21,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' => Hash::make('123'),
         'gender' => $faker->randomElement($array = array ('male','female','other')),
         'type' => $faker->randomElement($array = array ('client','petshop','admin')),
-        'photo' => $faker->imageUrl($width = 640, $height = 480)
+        'photo' => $faker->imageUrl($width = 640, $height = 480),
     ];
 });
 
@@ -35,7 +35,7 @@ $factory->define(App\Address::class, function (Faker\Generator $faker) {
         'street' => $faker->streetName,
         'number' => $faker->buildingNumber,
         'complement' => $faker->streetAddress,
-        'longitude' => $faker->ongitude($min = -180, $max = 180),
+        'longitude' => $faker->longitude($min = -180, $max = 180),
         'latitude' => $faker->latitude($min = -90, $max = 90) ,
     ];
 });

@@ -37,24 +37,26 @@ class AuthTest extends TestCase
     /** @test */
     public function user_authenticate_can_get_resource(){
         $user = factory('App\User')->create();
+        $phone = factory('App\Phone')->create(['user_id'=> $user->id]);
         $response = $this->post("login", [
             'email' => $user->email,
             'password' => '123'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->get('/users', ['Authorization' => "Bearer $json->token"]);
+        $this->get('/users/'.$user->id, ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
     }
 
     /** @test */
     public function user_authenticate_can_not_get_resource(){
         $user = factory('App\User')->create();
+        $phone = factory('App\Phone')->create(['user_id'=> $user->id]);
         $response = $this->post("auth/login", [
             'email' => $user->email,
             'password' => '12345'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->get('/users', ['Authorization' => "Bearer abcde"]);
+        $this->get('/users/'.$user->id, ['Authorization' => "Bearer abcde"]);
         $this->seeStatusCode(400);
     }
 }
