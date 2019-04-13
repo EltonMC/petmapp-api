@@ -20,17 +20,12 @@ class CreateReservationsTable extends Migration
                     ->references('id')
                     ->on('pets')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('petshop_id');
-            $table->foreign('petshop_id')
-                    ->references('id')
-                    ->on('petshops')
-                    ->onDelete('cascade');
             $table->unsignedBigInteger('turn_id');
             $table->foreign('turn_id')
                     ->references('id')
                     ->on('turns')
                     ->onDelete('cascade');
-            $table->string('status', 32);
+            $table->string('status', 32)->default('waiting');
             $table->date('reservation_day');
             $table->timestamps();
         });

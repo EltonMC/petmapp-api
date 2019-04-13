@@ -100,13 +100,9 @@ $factory->define(App\Turn::class, function (Faker\Generator $faker) {
 
 
 $factory->define(App\Reservation::class, function (Faker\Generator $faker) {
-    $petshop_id = factory('App\Petshop')->create()->id;
-    $service_id = factory('App\Service')->create(['petshop_id' => $petshop_id])->id;
     return [
-        'petshop_id' => $petshop_id,
-        'turn_id' => factory('App\Turn')->create(['service_id' => $service_id])->id,
+        'turn_id' => factory('App\Turn')->create()->id,
         'pet_id' => factory('App\Pet')->create()->id,
-        'status' => $faker->name,
         'reservation_day' => $faker->date($format = 'Y-m-d', $max = 'now'),
     ];
 });
