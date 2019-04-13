@@ -40,4 +40,8 @@ $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
     $router->get('reservations', 'ReservationController@index');
     $router->put('reservations/{id}', 'ReservationController@update');
 
+    $router->post('ratings', 'RatingController@store');
+    $router->get('ratings', 'RatingController@index');
+
+
 });
