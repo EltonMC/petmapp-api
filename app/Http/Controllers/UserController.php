@@ -11,6 +11,7 @@ use League\Fractal;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\Collection;
+use Illuminate\Support\Facades\Hash;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use App\Transformers\UserTransformer;
 
@@ -46,6 +47,8 @@ class UserController extends Controller
             'photo' => 'required',
         ]);
 
+        $request->password = Hash::make($request->password);
+
         $user = User::create($request->only([
             'email',
             'password',
@@ -79,9 +82,11 @@ class UserController extends Controller
             unset($address['user_id']);
             $user->address()->update($address);
         }
-
-        //Return error 404 response if product was not found
-        if(!$user) return $this->customResponse('product not found!', 404);
+        if($request->has('password')){
+            $request->password = Hash::make($request->password);
+        }
+        //Return error 404 response if user was not found
+        if(!$user) return $this->customResponse('user not found!', 404);
 
         $user->update($request->except(['email', 'phone', 'address', 'id']));
 
@@ -92,7 +97,7 @@ class UserController extends Controller
         }
 
         //Return error 400 response if updated was not successful
-        return $this->customResponse('Failed to update product!', 400);
+        return $this->customResponse('Failed to update user!', 400);
     }
 
     public function customResponse($message = 'success', $status = 200)

@@ -34,9 +34,17 @@ class UserTest extends TestCase
 
 
     public function test_can_create_a_user(){
-        $user = factory('App\User')->make(['phone' => "123123123123"]);
-        $user->address = factory('App\Address')->make()->toArray();
-        $response = $this->post("users", $user->toArray(), []);
+        $user = [
+            "name" => "Fabiola Herzog III",
+            "password" => "123",
+            "email" => "mcglynn.jameson@gmail.com",
+            "gender" => "male",
+            "type" => "petshop",
+            "phone" => "123123123",
+            "photo" => "https://lorempixel.com/640/480/?77198",
+            "address" => factory('App\Address')->make()->toArray()
+        ];
+        $response = $this->post("users", $user, []);
         // dd($this->response->getContent());
         $this->seeStatusCode(200);
         $this->seeJsonStructure($this->user_json);
