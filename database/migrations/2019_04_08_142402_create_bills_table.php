@@ -20,7 +20,7 @@ class CreateBillsTable extends Migration
                     ->references('id')
                     ->on('reservations')
                     ->onDelete('cascade');
-            $table->string('status', 32);
+            $table->enum('status', ['waiting', 'paid'])->default('waiting');
             $table->timestamps();
         });
     }
