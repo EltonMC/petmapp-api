@@ -65,7 +65,7 @@ class ProductsController extends Controller
         ]);
 
         //Return error 404 response if product was not found
-        if(!Product::find($id)) return $this->errorResponse('product not found!', 404);
+        if(!Product::find($id)) return $this->customResponse('product not found!', 404);
 
         $product = Product::find($id)->update($request->all());
 
@@ -76,13 +76,13 @@ class ProductsController extends Controller
         }
 
         //Return error 400 response if updated was not successful
-        return $this->errorResponse('Failed to update product!', 400);
+        return $this->customResponse('Failed to update product!', 400);
     }
 
     public function destroy($id){
 
         //Return error 404 response if product was not found
-        if(!Product::find($id)) return $this->errorResponse('Product not found!', 404);
+        if(!Product::find($id)) return $this->customResponse('Product not found!', 404);
 
         //Return 410(done) success response if delete was successful
         if(Product::find($id)->delete()){
@@ -90,7 +90,7 @@ class ProductsController extends Controller
         }
 
         //Return error 400 response if delete was not successful
-        return $this->errorResponse('Failed to delete product!', 400);
+        return $this->customResponse('Failed to delete product!', 400);
     }
 
     public function customResponse($message = 'success', $status = 200)

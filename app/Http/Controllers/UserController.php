@@ -81,7 +81,7 @@ class UserController extends Controller
         }
 
         //Return error 404 response if product was not found
-        if(!$user) return $this->errorResponse('product not found!', 404);
+        if(!$user) return $this->customResponse('product not found!', 404);
 
         $user->update($request->except(['email', 'phone', 'address', 'id']));
 
@@ -92,7 +92,7 @@ class UserController extends Controller
         }
 
         //Return error 400 response if updated was not successful
-        return $this->errorResponse('Failed to update product!', 400);
+        return $this->customResponse('Failed to update product!', 400);
     }
 
     public function customResponse($message = 'success', $status = 200)
