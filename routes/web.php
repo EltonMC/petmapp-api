@@ -36,4 +36,8 @@ $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
     $router->put('pets/{id}', 'PetController@update');
     $router->delete('pets/{id}', 'PetController@destroy');
 
+    $router->post('reservations', 'ReservationController@store');
+    $router->get('reservations', 'ReservationController@index');
+    $router->put('reservations/{id}', 'ReservationController@update');
+
 });
