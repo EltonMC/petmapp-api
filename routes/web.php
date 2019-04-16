@@ -43,5 +43,15 @@ $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
     $router->post('ratings', 'RatingController@store');
     $router->get('ratings', 'RatingController@index');
 
+    $router->post('petshops', 'PetshopController@store');
+    $router->get('petshops/{id}', 'PetshopController@show');
+    $router->put('petshops/{id}', 'PetshopController@update');
 
+    $router->post('services', 'ServiceController@store');
+    $router->get('services/{id}', 'ServiceController@show');
+    $router->put('services/{id}', 'ServiceController@update');
+
+    $router->post('turns', 'TurnController@store');
+    $router->get('turns/{id}', 'TurnController@show');
+    $router->put('turns/{id}', 'TurnController@update');
 });

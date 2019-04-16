@@ -5,6 +5,10 @@ class Petshop extends Model
 {
     protected $guarded = [];
 
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
     public function service(){
         return $this->hasOne('App\Service');
     }
