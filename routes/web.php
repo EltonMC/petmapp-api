@@ -23,7 +23,6 @@ $router->post('products', 'ProductsController@store');
 $router->delete('products/{id}', 'ProductsController@destroy');
 
 $router->post('login', 'AuthController@authenticate');
-
 $router->post('users', 'UserController@store');
 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
