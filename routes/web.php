@@ -15,13 +15,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-//product routes
-$router->get('products', 'ProductsController@index');
-$router->get('products/{id}', 'ProductsController@show');
-$router->put('products/{id}', 'ProductsController@update');
-$router->post('products', 'ProductsController@store');
-$router->delete('products/{id}', 'ProductsController@destroy');
-
 $router->post('login', 'AuthController@authenticate');
 $router->post('users', 'UserController@store');
 
