@@ -11,6 +11,7 @@
 |
 */
 
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -47,3 +48,4 @@ $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
     $router->get('turns/{id}', 'TurnController@show');
     $router->put('turns/{id}', 'TurnController@update');
 });
+
