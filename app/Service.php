@@ -8,4 +8,8 @@ class Service extends Model
     public function petshop(){
         return $this->belongsTo('App\Petshop');
     }
+
+    public function turns(){
+        return $this->hasOne('App\Turn');
+    }
 }
