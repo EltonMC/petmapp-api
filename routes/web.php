@@ -36,6 +36,7 @@ $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
     $router->post('ratings', 'RatingController@store');
     $router->get('ratings', 'RatingController@index');
 
+    $router->get('petshops', 'PetshopController@index');
     $router->post('petshops', 'PetshopController@store');
     $router->get('petshops/{id}', 'PetshopController@show');
     $router->put('petshops/{id}', 'PetshopController@update');

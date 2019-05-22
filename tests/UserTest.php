@@ -50,6 +50,9 @@ class UserTest extends TestCase
         $this->seeJsonStructure($this->user_json);
     }
 
+    //     public function test_can_not_create_a_user_because_email_exist(){}
+    //     public function test_can_not_create_a_user_because_missing_value(){}
+
     public function test_can_get_user_info(){
         $user = $this->create_user();
         $response = $this->post("login", [

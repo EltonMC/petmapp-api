@@ -30,6 +30,14 @@ class PetshopController extends Controller
         $this->fractal = new Manager();
     }
 
+    public function index(Request $request){
+        $paginator = Petshop::paginate();
+        $petshops = $paginator->getCollection();
+        $resource = new Collection($petshops, new PetshopTransformer);
+        $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
+        return $this->fractal->createData($resource)->toArray();
+    }
+
     public function show($id){
         $petshop = Petshop::find($id);
         $resource = new Item($petshop, new PetshopTransformer);
