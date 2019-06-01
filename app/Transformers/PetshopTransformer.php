@@ -13,7 +13,7 @@ class PetshopTransformer extends Fractal\TransformerAbstract
 	        'user_id'   => $petshop->user_id,
             'name'    =>  $petshop->name,
             'description'    =>  $petshop->description,
-            'phone'    =>  $petshop->user->phone->phone,
+            'phone'    =>  $petshop->user->phone,
             'address'    =>  $petshop->user->address,
             'services' => $petshop->services,
             // 'turns' => $petshop->services->turns,

@@ -44,6 +44,7 @@ class AuthTest extends TestCase
         ])->response->getContent();
         $json = json_decode($response);
         $this->get('/users/'.$user->id, ['Authorization' => "Bearer $json->token"]);
+        
         $this->seeStatusCode(200);
     }
 
