@@ -25,7 +25,7 @@ class RatingTest extends TestCase
 
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
 
@@ -64,7 +64,7 @@ class RatingTest extends TestCase
 
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         $pet = factory('App\Pet')->create(['user_id' => $user->id]);

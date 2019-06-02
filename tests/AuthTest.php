@@ -13,7 +13,7 @@ class AuthTest extends TestCase
         $user = factory('App\User')->create();
         $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ]);
         $this->seeStatusCode(200);
         $this->seeJsonStructure(
@@ -40,7 +40,7 @@ class AuthTest extends TestCase
         $phone = factory('App\Phone')->create(['user_id'=> $user->id]);
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         $this->get('/users/'.$user->id, ['Authorization' => "Bearer $json->token"]);

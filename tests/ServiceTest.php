@@ -25,7 +25,7 @@ class ServiceTest extends TestCase
         $user = factory('App\User')->create();
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         return ['Authorization' => "Bearer $json->token"];

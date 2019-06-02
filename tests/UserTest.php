@@ -36,7 +36,7 @@ class UserTest extends TestCase
     public function test_can_create_a_user(){
         $user = [
             "name" => "Fabiola Herzog III",
-            "password" => "123",
+            "password" => "123qwerty",
             "email" => "mcglynn.jameson@gmail.com",
             "gender" => "male",
             "type" => "petshop",
@@ -57,7 +57,7 @@ class UserTest extends TestCase
         $user = $this->create_user();
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         $this->get('/users/'.$user->id, ['Authorization' => "Bearer $json->token"]);
@@ -71,7 +71,7 @@ class UserTest extends TestCase
         $user->name = 'test';
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
 
         $json = json_decode($response);
@@ -89,7 +89,7 @@ class UserTest extends TestCase
         $user->phone = '0000000000';
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         $this->put('/users/'.$user->id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
@@ -107,7 +107,7 @@ class UserTest extends TestCase
         ];
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         $this->put('/users/'.$user->id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
@@ -125,7 +125,7 @@ class UserTest extends TestCase
         ];
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         $this->put('/users/'.$user->id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
@@ -142,7 +142,7 @@ class UserTest extends TestCase
         $user->id = '123';
         $response = $this->post("login", [
             'email' => $user->email,
-            'password' => '123'
+            'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
         $this->put('/users/'.$old_id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
