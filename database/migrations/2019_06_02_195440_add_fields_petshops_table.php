@@ -17,8 +17,8 @@ class AddFieldsPetshopsTable extends Migration
             $table->string('logo')->nullable()->after('description');
             $table->double('rating_average', 2, 1)->default(0)->after('logo');
             $table->integer('max_discount')->default(0)->after('rating_average');
-            $table->integer('services')->default(0)->after('max_discount');
-            $table->text('schedule')->nullable()->after('services');
+            $table->integer('num_services')->default(0)->after('max_discount');
+            $table->text('schedule')->nullable()->after('num_services');
         });
     }
 
@@ -33,7 +33,7 @@ class AddFieldsPetshopsTable extends Migration
             $table->dropColumn('logo');
             $table->dropColumn('rating_average');
             $table->dropColumn('max_discount');
-            $table->dropColumn('services');
+            $table->dropColumn('num_services');
             $table->dropColumn('schedule');
         });
     }

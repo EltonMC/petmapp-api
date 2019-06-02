@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user->id,
             'name' => 'Atalaia Rações',
             'schedule' => 'Segunda a sexta: 8h às 18h <br/> Sábado: 8h às 12h',
-            'services' => 89,
+            'num_services' => 89,
             'max_discount' => 30,
             'rating_average' => 4.5
         ]);  
