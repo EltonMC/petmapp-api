@@ -16,6 +16,8 @@ class ServiceTest extends TestCase
             'petshop_id',
             'type',
             'status',
+            'price',
+            'max_discount',
             'created_at',
             'updated_at',
         ]
@@ -58,6 +60,8 @@ class ServiceTest extends TestCase
                     'petshop_id',
                     'type',
                     'status',
+                    'price',
+                    'max_discount',
                     'created_at',
                     'updated_at',
                 ]

@@ -11,7 +11,9 @@ class ServiceTransformer extends Fractal\TransformerAbstract
 	    return [
 	        'id'      => (int) $service->id,
 	        'petshop_id'   => $service->petshop_id,
-            'type'    =>  $service->type,
+			'type'    =>  $service->type,
+			'price' =>  $service->price,
+            'max_discount' =>  $service->max_discount,
             'status'    =>  $service->status,
             'created_at'    =>  $service->created_at->format('d-m-Y'),
 	        'updated_at'    =>  $service->updated_at->format('d-m-Y'),
