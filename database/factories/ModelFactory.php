@@ -75,7 +75,7 @@ $factory->define(App\Pet::class, function (Faker\Generator $faker) {
 $factory->define(App\PetshopImage::class, function (Faker\Generator $faker) {
     return [
         'petshop_id' => factory('App\Petshop')->create()->id,
-        'image' => $faker->imageUrl($width = 640, $height = 480)
+        'image' => $faker->imageUrl($width = 1024, $height = 480)
     ];
 });
 
@@ -93,8 +93,8 @@ $factory->define(App\Turn::class, function (Faker\Generator $faker) {
         'day' => $faker->randomElement($array = array ('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun')),
         'time_start' => $faker->time,
         'time_end' => $faker->time,
-        'max_reservation' => $faker->randomDigitNotNull,
-        'percent_discount' => $faker->randomDigitNotNull,
+        'max_reservation' => $faker->numberBetween($min = 1, $max = 50),
+        'percent_discount' => $faker->numberBetween($min = 10, $max = 50),
         'status' => $faker->boolean,
     ];
 });
