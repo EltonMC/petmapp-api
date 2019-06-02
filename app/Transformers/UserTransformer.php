@@ -18,7 +18,10 @@ class UserTransformer extends Fractal\TransformerAbstract
 	        'created_at'    =>  $user->created_at->format('d-m-Y'),
 	        'updated_at'    =>  $user->updated_at->format('d-m-Y'),
             'phone' => $user->phone->phone,
-            'address' => $user->address
+			'address' => $user->address,
+			'notify_sms' => $user->notify_sms,
+            'notify_email' => $user->notify_email,
+            'notify_push' => $user->notify_push
 	    ];
 	}
 }

@@ -21,7 +21,10 @@ class UserTest extends TestCase
             'created_at',
             'updated_at',
             'address',
-            'phone'
+            'phone',
+            'notify_sms',
+            'notify_email',
+            'notify_push'
         ]
     ];
 
