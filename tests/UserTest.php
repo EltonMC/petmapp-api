@@ -53,8 +53,19 @@ class UserTest extends TestCase
         $this->seeJsonStructure($this->user_json);
     }
 
-    //     public function test_can_not_create_a_user_because_email_exist(){}
-    //     public function test_can_not_create_a_user_because_missing_value(){}
+    public function test_can_not_create_a_user_because_email_exist(){
+        $user = factory('App\User')->create();
+        factory('App\Phone')->create(['user_id'=> $user->id]);
+        factory('App\Address')->create(['user_id'=> $user->id]);
+        $user = $user->toArray();
+        $user['password'] = '123qwery';
+        $response = $this->post("users", $user, []);
+        dd($this->response->getContent());
+        $this->seeStatusCode(422);
+        $this->seeJson([
+            'email' => 'The email has already been taken.',
+         ]);
+    }
 
     public function test_can_get_user_info(){
         $user = $this->create_user();
