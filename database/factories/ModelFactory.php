@@ -18,7 +18,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name'     => $faker->name,
         'email'    => $faker->unique()->email,
-        'password' => Hash::make('123'),
+        'password' => Hash::make('123qwerty'),
         'gender' => $faker->randomElement($array = array ('male','female','other')),
         'type' => $faker->randomElement($array = array ('client','petshop','admin')),
         'photo' => $faker->imageUrl($width = 640, $height = 480),
@@ -51,8 +51,9 @@ $factory->define(App\Petshop::class, function (Faker\Generator $faker) {
     return [
         'user_id' => factory('App\User')->create()->id,
         'name'     => $faker->name,
-        'description' => $faker->text
-
+        'logo' => $faker->imageUrl($width = 640, $height = 480),
+        'description' => $faker->text,
+        'schedule' => $faker->text
     ];
 });
 
