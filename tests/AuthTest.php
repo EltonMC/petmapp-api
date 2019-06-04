@@ -16,9 +16,10 @@ class AuthTest extends TestCase
             'password' => '123qwerty'
         ]);
         $this->seeStatusCode(200);
-        $this->seeJsonStructure(
-            ['token']
-        );
+
+        $this->seeJsonStructure([
+            'token'
+        ]);
     }
 
     /** @test */
@@ -43,8 +44,7 @@ class AuthTest extends TestCase
             'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->get('/users/'.$user->id, ['Authorization' => "Bearer $json->token"]);
-        
+        $this->get('/users', ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
     }
 
@@ -57,7 +57,7 @@ class AuthTest extends TestCase
             'password' => '12345'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->get('/users/'.$user->id, ['Authorization' => "Bearer abcde"]);
+        $this->get('/users', ['Authorization' => "Bearer abcde"]);
         $this->seeStatusCode(400);
     }
 }

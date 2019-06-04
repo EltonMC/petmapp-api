@@ -60,10 +60,9 @@ class UserTest extends TestCase
         $user = $user->toArray();
         $user['password'] = '123qwery';
         $response = $this->post("users", $user, []);
-        dd($this->response->getContent());
         $this->seeStatusCode(422);
-        $this->seeJson([
-            'email' => 'The email has already been taken.',
+        $this->seeJsonStructure([
+            'email',
          ]);
     }
 
@@ -74,7 +73,7 @@ class UserTest extends TestCase
             'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->get('/users/'.$user->id, ['Authorization' => "Bearer $json->token"]);
+        $this->get('/users', ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
         $this->seeJsonStructure($this->user_json);
 

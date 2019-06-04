@@ -20,11 +20,11 @@ class CreateAddressesTable extends Migration
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade');
-            $table->string('cep', 16);
-            $table->string('state', 64);
-            $table->string('city', 128);
-            $table->string('district', 128);
-            $table->string('street', 128);
+            $table->string('cep', 16)->nullable();
+            $table->string('state', 64)->nullable();
+            $table->string('city', 128)->nullable();
+            $table->string('district', 128)->nullable();
+            $table->string('street', 128)->nullable();
             $table->string('number', 32)->nullable();
             $table->string('complement')->nullable();
             $table->string('longitude')->nullable();

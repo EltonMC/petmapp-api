@@ -30,6 +30,12 @@ class UserController extends Controller
         $this->fractal = new Manager();
     }
 
+    public function index(Request $request){
+        $user = User::find($request->auth->id);
+        $resource = new Item($user, new UserTransformer);
+        return $this->fractal->createData($resource)->toArray();
+    }
+
     public function show($id){
         $user = User::find($id);
         $resource = new Item($user, new UserTransformer);
@@ -44,6 +50,8 @@ class UserController extends Controller
             'name' => 'required',
             'gender' => 'required',
             'type' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
             'photo' => 'required',
         ]);
 

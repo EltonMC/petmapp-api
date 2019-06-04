@@ -25,7 +25,7 @@ class CreateReservationsTable extends Migration
                     ->references('id')
                     ->on('turns')
                     ->onDelete('cascade');
-            $table->enum('status', ['waiting', 'approved', 'concluded'])->default('waiting');
+            $table->enum('status', ['waiting', 'approved', 'concluded', 'canceled'])->default('waiting');
             $table->date('reservation_day');
             $table->timestamps();
         });

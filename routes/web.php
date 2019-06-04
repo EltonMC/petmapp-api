@@ -20,7 +20,8 @@ $router->post('login', 'AuthController@authenticate');
 $router->post('users', 'UserController@store');
 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
-    $router->get('users/{id}', 'UserController@show');
+    $router->get('users', 'UserController@index');
+    // $router->get('users/{id}', 'UserController@show');
     $router->put('users/{id}', 'UserController@update');
 
     $router->get('pets', 'PetController@index');

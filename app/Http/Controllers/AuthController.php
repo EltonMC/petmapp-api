@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 use Firebase\JWT\ExpiredException;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Routing\Controller as BaseController;
+use League\Fractal;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Item;
+use League\Fractal\Resource\Collection;
+use App\Transformers\UserTransformer;
 
 class AuthController extends BaseController
 {
@@ -27,6 +32,8 @@ class AuthController extends BaseController
      */
     public function __construct(Request $request) {
         $this->request = $request;
+        $this->fractal = new Manager();
+
     }
 
     /**
@@ -75,6 +82,7 @@ class AuthController extends BaseController
 
         // Verify the password and generate the token
         if (Hash::check($this->request->input('password'), $user->password)) {
+            $resource = new Item($user, new UserTransformer);
             return response()->json([
                 'token' => $this->jwt($user)
             ], 200);
