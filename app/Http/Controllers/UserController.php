@@ -45,7 +45,7 @@ class UserController extends Controller
     public function store(Request $request){
         //validate request parameters
         $this->validate($request, [
-            'email' => 'required|max:255|unique:users',
+            'email' => 'required||min:8|max:255|unique:users',
             'password' => 'required',
             'name' => 'required',
             'gender' => 'required',
@@ -77,7 +77,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'gender' => 'required',
-            'type' => 'required',
+            'password' => 'min:8',
+
         ]);
 
         $user = User::find($request->auth->id);
@@ -96,7 +97,7 @@ class UserController extends Controller
         //Return error 404 response if user was not found
         if(!$user) return $this->customResponse('user not found!', 404);
 
-        $user->update($request->except(['email', 'phone', 'address', 'id']));
+        $user->update($request->except(['type', 'email', 'phone', 'address', 'id']));
 
         if($user){
             //return updated data
