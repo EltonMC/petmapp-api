@@ -31,7 +31,11 @@ class PetshopController extends Controller
     }
 
     public function index(Request $request){
-        $paginator = Petshop::paginate();
+        $paginator = Petshop::whereHas('services', 
+            function($query) use($request){
+                $query->where('type', '=', $request->input('type'));
+            })->paginate();
+
         $petshops = $paginator->getCollection();
         $resource = new Collection($petshops, new PetshopTransformer);
         $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
