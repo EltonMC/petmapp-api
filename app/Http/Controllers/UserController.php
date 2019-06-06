@@ -14,6 +14,7 @@ use League\Fractal\Resource\Collection;
 use Illuminate\Support\Facades\Hash;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use App\Transformers\UserTransformer;
+use Cloudinary\Uploader;
 
 class UserController extends Controller
 {
@@ -52,10 +53,14 @@ class UserController extends Controller
             'type' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'photo' => 'required',
         ]);
 
         $request->password = Hash::make($request->password);
+
+        if($request->has('photo')){
+            $image = Uploader::upload($request->photo);
+            $request->merge(['photo' => $image['secure_url']]);
+        }
 
         $user = User::create($request->only([
             'email',
@@ -97,7 +102,13 @@ class UserController extends Controller
         //Return error 404 response if user was not found
         if(!$user) return $this->customResponse('user not found!', 404);
 
-        $user->update($request->except(['type', 'email', 'phone', 'address', 'id']));
+
+        if($request->has('photo')){
+            $image = Uploader::upload($request->photo);
+            $request->merge(['photo' => $image['secure_url']]);
+        }
+
+        $user->update($request->only(['name', 'gender', 'password', 'photo']));
 
         if($user){
             //return updated data

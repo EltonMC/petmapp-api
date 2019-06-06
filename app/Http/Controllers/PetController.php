@@ -15,6 +15,7 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use App\Transformers\PetTransformer;
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
+use Cloudinary\Uploader;
 
 class PetController extends Controller
 {
@@ -62,9 +63,13 @@ class PetController extends Controller
             'temper' => 'required',
         ]);
 
-        $data_pet = $request->all();
-        $data_pet['user_id'] = $request->auth->id;
-        $pet = Pet::create($data_pet);
+        // if($request->has('image')){
+        //     $image = Uploader::upload($request->photo);
+        //     $request->merge(['photo' => $image['secure_url']]);
+        // }
+
+        $request->merge(['user_id' => $request->auth->id]);
+        $pet = Pet::create($request->all());
 
         $resource = new Item($pet, new PetTransformer);
         return $this->fractal->createData($resource)->toArray();
