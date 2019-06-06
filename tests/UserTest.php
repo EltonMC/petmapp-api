@@ -88,7 +88,7 @@ class UserTest extends TestCase
         ])->response->getContent();
 
         $json = json_decode($response);
-        $this->put('/users/'.$user->id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
+        $this->put('/users', $user->toArray(), ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
         $this->seeJsonStructure($this->user_json);
         $this->seeJson([
@@ -105,7 +105,7 @@ class UserTest extends TestCase
             'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->put('/users/'.$user->id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
+        $this->put('/users', $user->toArray(), ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
         $this->seeJsonStructure($this->user_json);
         $this->seeJson([
@@ -123,7 +123,7 @@ class UserTest extends TestCase
             'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->put('/users/'.$user->id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
+        $this->put('/users', $user->toArray(), ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
         $this->seeJsonStructure($this->user_json);
         $this->seeJson([
@@ -141,7 +141,7 @@ class UserTest extends TestCase
             'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->put('/users/'.$user->id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
+        $this->put('/users', $user->toArray(), ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
         $this->seeJsonStructure($this->user_json);
         $this->seeJson([
@@ -158,7 +158,7 @@ class UserTest extends TestCase
             'password' => '123qwerty'
         ])->response->getContent();
         $json = json_decode($response);
-        $this->put('/users/'.$old_id, $user->toArray(), ['Authorization' => "Bearer $json->token"]);
+        $this->put('/users', $user->toArray(), ['Authorization' => "Bearer $json->token"]);
         $this->seeStatusCode(200);
         $this->seeJsonStructure($this->user_json);
         $this->seeJson([

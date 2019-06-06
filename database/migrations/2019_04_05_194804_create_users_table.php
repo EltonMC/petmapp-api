@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->enum('gender', ['male', 'female', 'other']);
             $table->enum('type', ['client', 'petshop', 'admin'])->default('client');
             $table->text('photo')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -71,7 +71,7 @@ class UserController extends Controller
         return $this->fractal->createData($resource)->toArray();
     }
 
-    public function update($id, Request $request){
+    public function update(Request $request){
 
         //validate request parameters
         $this->validate($request, [
@@ -80,7 +80,7 @@ class UserController extends Controller
             'type' => 'required',
         ]);
 
-        $user = User::find($id);
+        $user = User::find($request->auth->id);
 
         if($request->has('phone')){
             $user->phone()->update($request->only(['phone']));

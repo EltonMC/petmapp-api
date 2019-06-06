@@ -18,3 +18,4 @@ class Petshop extends Model
         return $this->hasMany('App\PetshopImage', 'petshop_id', 'id');
     }
 }
+
