@@ -18,6 +18,7 @@ use Cloudinary\Uploader;
 
 class UserController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *

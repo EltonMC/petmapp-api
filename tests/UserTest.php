@@ -50,7 +50,9 @@ class UserTest extends TestCase
         $response = $this->post("users", $user, []);
         // dd($this->response->getContent());
         $this->seeStatusCode(200);
-        $this->seeJsonStructure($this->user_json);
+        $this->seeJsonStructure([
+            'token'
+        ]);
     }
 
     public function test_can_not_create_a_user_because_email_exist(){

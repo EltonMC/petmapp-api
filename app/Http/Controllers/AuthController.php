@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\User;
+use App\Address;
+use App\Phone;
+
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Firebase\JWT\ExpiredException;
@@ -14,6 +17,8 @@ use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\Collection;
 use App\Transformers\UserTransformer;
+
+use Cloudinary\Uploader;
 
 class AuthController extends BaseController
 {
@@ -82,7 +87,6 @@ class AuthController extends BaseController
 
         // Verify the password and generate the token
         if (Hash::check($this->request->input('password'), $user->password)) {
-            $resource = new Item($user, new UserTransformer);
             return response()->json([
                 'token' => $this->jwt($user)
             ], 200);
@@ -93,4 +97,41 @@ class AuthController extends BaseController
             'error' => 'Email or password is wrong.'
         ], 400);
     }
+
+    public function store(Request $request){
+        //validate request parameters
+        $this->validate($request, [
+            'email' => 'required||min:8|max:255|unique:users',
+            'password' => 'required',
+            'name' => 'required',
+            'gender' => 'required',
+            'type' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+        $request->password = Hash::make($request->password);
+
+        if($request->has('photo')){
+            $image = Uploader::upload($request->photo);
+            $request->merge(['photo' => $image['secure_url']]);
+        }
+
+        $user = User::create($request->only([
+            'email',
+            'password',
+            'name',
+            'gender',
+            'type',
+            'photo'
+        ]));
+        $user->phone()->create($request->only(['phone']));
+        $user->address()->create($request->get('address'));
+        return response()->json([
+            'token' => $this->jwt($user)
+        ], 200);
+        // $resource = new Item($user, new UserTransformer);
+        // return $this->fractal->createData($resource)->toArray();
+    }
+
 }
