@@ -110,7 +110,7 @@ class AuthController extends BaseController
             'address' => 'required',
         ]);
 
-        $request->password = Hash::make($request->password);
+        $request->merge(['password' => Hash::make($request->password)]);
 
         if($request->has('photo')){
             $image = Uploader::upload($request->photo);
